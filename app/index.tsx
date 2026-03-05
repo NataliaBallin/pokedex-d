@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 
 export default function Index() {
+  const [results, setResults] = useState<any[]>([]);
   useEffect(() => {
     console.log("Entre en pantalla");
     getPokemons();
@@ -11,11 +12,12 @@ export default function Index() {
     const URL = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
     const response = await fetch(URL);
     const data = await response.json();
-    console.log(response);
+    console.log(data);
+    setResults(data.results);
   };
   return (
     <View>
-      <Text>Natalia</Text>
+      <Text>{results[250]?.name}</Text>
     </View>
   );
 }
